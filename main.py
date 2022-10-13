@@ -56,6 +56,8 @@ pen.hideturtle()
 pen.goto(0, 260)
 pen.write("Score: 0  High Score: 0", align="center", font=("Courier", 24, "normal"))
 
+gen = 0
+
 w = a = s = d = False
 turn = False
 
@@ -210,10 +212,9 @@ def game_over():
     segments.clear()
 
     # Transit between learning and gaming
-    # if not gaming_mode:
     agent.fit()
     global gaming_mode
-    gaming_mode = not gaming_mode
+    gaming_mode = True
 
     # Reset the score
     global score
@@ -225,6 +226,11 @@ def game_over():
 
     pen.clear()
     pen.write("Score: {}  High Score: {}".format(score, high_score), align="center", font=("Courier", 24, "normal"))
+
+    global gen
+    gen = gen + 1
+    print(gen)
+    print(np.size(agent.x, 0))
 
     # Show some interesting graphs
     # cmap = sns.cubehelix_palette(as_cmap=True)

@@ -1,7 +1,7 @@
 from sklearn import svm
 
 
-clf = [svm.SVC(kernel="poly") for i in range(4)]
+clf = [svm.SVC(kernel="poly", degree=5) for i in range(4)]
 x = []
 y = [[] for i in range(len(clf))]
 
