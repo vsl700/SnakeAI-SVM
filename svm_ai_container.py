@@ -1,9 +1,10 @@
 from sklearn import svm
-
+import csv
 
 clf = [svm.SVC(kernel="poly") for i in range(4)]
 x = []
 y = [[] for i in range(len(clf))]
+csv_data = []
 
 
 def fit():
@@ -34,6 +35,16 @@ def append_data(snake_x, snake_y, length, food_x, food_y, direction,
     for i in range(len(arr_y)):
         y[i].append(1) if arr_y[i] else y[i].append(0)
 
+    directions = ["up", "left", "down", "right"]
+    out_dir = [""]
+    for i in range(len(directions)):
+        if arr_y[i]:
+            out_dir = [directions[i]]
+            break
+
+    arr_csv = arr_x + out_dir
+    csv_data.append(arr_csv)
+
 
 def predict_data(snake_x, snake_y, length, food_x, food_y, direction):
     if direction == "stop":
@@ -48,3 +59,9 @@ def predict_data(snake_x, snake_y, length, food_x, food_y, direction):
             return directions[i]
 
     return "none"
+
+
+def save_to_file():
+    with open('data.csv', 'w') as f:
+        writer = csv.writer(f)
+        writer.writerows(csv_data)

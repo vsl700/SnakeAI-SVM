@@ -211,6 +211,7 @@ def game_over():
 
     # Transit between learning and gaming
     # if not gaming_mode:
+    agent.save_to_file()
     agent.fit()
     global gaming_mode
     gaming_mode = not gaming_mode
@@ -333,4 +334,4 @@ while True:
 
     time.sleep(delay)
 
-wn.mainloop()
+# wn.mainloop()
